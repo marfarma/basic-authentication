@@ -41,5 +41,5 @@ No special remarks
 = 1.0 =
 * first version of this plugin
 
-= 1.1 =
+= 1.1 > 1.3 =
 * fix for people with older PHP
