@@ -5,7 +5,7 @@ Plugin Name: Basic Authentication
 Plugin URI: http://www.cuvedev.net
 Description: Disable access to wordpress if not logged in
 Author: Klaas Cuvelier
-Version: 1.4
+Version: 1.5
 */
 
 
@@ -14,7 +14,7 @@ Version: 1.4
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.4
+	 * @version		1.5
 	 * @license		GPL v2.0
 	 * 
 	 */
