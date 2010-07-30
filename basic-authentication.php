@@ -5,7 +5,7 @@ Plugin Name: Basic Authentication
 Plugin URI: http://www.cuvedev.net
 Description: Disable access to wordpress if not logged in
 Author: Klaas Cuvelier
-Version: 1.3
+Version: 1.4
 */
 
 
@@ -14,7 +14,7 @@ Version: 1.3
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.3
+	 * @version		1.4
 	 * @license		GPL v2.0
 	 * 
 	 */
@@ -32,8 +32,10 @@ Version: 1.3
 		}
 		
 		// get current page
-		list($url, $crap) = explode('?', $_SERVER['REQUEST_URI']);
-	
+		$url = str_replace(site_url(), '', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);		
+		list($url, $crap) = explode('?', $url);
+		
+
 		// check if not login-page or admin-panel
 		if ($url !== '/wp-login.php' && substr($url, 0, 9) !== '/wp-admin')
 		{
@@ -47,14 +49,14 @@ Version: 1.3
 				
 				if (!basic_authentication_predefinedLoggedIn())
 				{
-					basic_authentication_showLoginForm($login);
+					basic_authentication_showLoginForm($login, implode('?', array($url, $crap)));
 					exit;
 				}
 				
 			}
 			else if ($authMethod === 'wp-login'	&& !is_user_logged_in())
 			{
-				header('LOCATION: /wp-login.php?redirect_to=' . urlencode($url) . '&reauth=1');
+				header('LOCATION: ' . site_url('wp-login.php?redirect_to=' . urlencode($url) . '&reauth=1'));
 				exit;				
 			}
 		}
@@ -86,7 +88,7 @@ Version: 1.3
 		{
 			if ($_POST['pwd'] === get_option('basic_authentication_password'))
 			{
-				$_SESSION['basic_authentication_loggedin'] 	= true;	
+				$_SESSION['basic_authentication_loggedin'] 	= true;					
 				$_SESSION['basic_authentication_tries'] 	= 0;
 				return 'OK';		
 			}	
@@ -100,7 +102,7 @@ Version: 1.3
 	
 	
 	// show basic_authentication login form
-	function basic_authentication_showLoginForm($login)
+	function basic_authentication_showLoginForm($login, $url)
 	{
 		include(dirname(__FILE__) . '/basic-auth-login.php'); 
 	}
@@ -108,7 +110,7 @@ Version: 1.3
 	// basic auth options
 	function basic_auth_options () 
 	{
-			include(dirname(__FILE__) . '/basic-auth-options.php');
+		include(dirname(__FILE__) . '/basic-auth-options.php');
 	}
 
 ?>
