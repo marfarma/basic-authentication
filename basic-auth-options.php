@@ -4,10 +4,14 @@
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.5
+	 * @version		1.6
 	 * @license		GPL v2.0
 	 * 
 	 */
+	 
+	 $uploadInf = wp_upload_dir();
+	 $uploadDir = str_replace( get_option('siteurl'), '', $uploadInf['baseurl']);
+	 $templtDir = bloginfo('template_directory');
 ?>
 <div class="wrap">
 	<h2>Basic Authentication: Options</h2>
@@ -41,4 +45,14 @@
 			<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 		</p>
 	</form>
+	
+	<h2>Password protect wp-content files (<i>experimental, advanced</i>)</h2>
+	<p>If you want to protect files in your wp-content folder (themes and uploaded files), you'll have to edit your .htaccess file and add this line at the bottom:</p>
+	<p>For upload protection only (recommended):
+		<pre style="border: 1px solid #999; background: #fff; padding: 5px 10px">RewriteRule ^<?php echo $uploadDir; ?>/(.*) wp-content/plugins/basic-authentication/basic-auth-fileprotect.php?_folder=upload&_protect=$2 [QSA]</pre>
+	</p>
+	<p>For themes and uploads:
+		<pre style="border: 1px solid #999; background: #fff; padding: 5px 10px">RewriteRule ^<?php echo $uploadDir; ?>/(.*) wp-content/plugins/basic-authentication/basic-auth-fileprotect.php?_folder=$1&_protect=$2 [QSA]
+RewriteRule ^/wp-content/themes/(.*) wp-content/plugins/basic-authentication/basic-auth-fileprotect.php?_folder=themes&_protect=$2 [QSA]</pre>
+	</p>
 </div>

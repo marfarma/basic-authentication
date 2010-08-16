@@ -2,10 +2,11 @@
 
 /*
 Plugin Name: Basic Authentication
-Plugin URI: http://www.cuvedev.net
+Plugin URI: http://www.cuvedev.net/2010/07/wordpress-plugin-authentication/
 Description: Disable access to wordpress if not logged in
 Author: Klaas Cuvelier
-Version: 1.5
+Author URI: http://www.cuvedev.net
+Version: 1.6
 */
 
 
@@ -14,7 +15,7 @@ Version: 1.5
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.5
+	 * @version		1.6
 	 * @license		GPL v2.0
 	 * 
 	 */
@@ -72,17 +73,35 @@ Version: 1.5
 	// check if basic_authentication logged in
 	function basic_authentication_predefinedLoggedIn()
 	{
-		return $_SESSION['basic_authentication_loggedin'] === true;	
+		return $_SESSION['basic_authentication_loggedin'] === true && $_SESSION['basic_authentication_pwd'] === md5(get_option('basic_authentication_password'));	
 	}
 	
 	
 	// basic authentication check if try to login
 	function basic_authentication_doLogin()
 	{
-		if (is_numeric($_SESSION['basic_authentication_tries']) && $_SESSION['basic_authentication_tries']++ > 3)
+		// time to deny logging in when tried to much (in minutes)
+		$timeBlocked = 15;
+		
+		if (is_numeric($_SESSION['basic_authentication_tries']) && 	$_SESSION['basic_authentication_tries'] >= 3) 
 		{
-			return 'You have tried to many times. You have been temporaraly blocked.';
+			$_SESSION['basic_authentication_tries'] = 0;
+			$_SESSION['basic_authentication_block'] = time();
 		}
+
+		if (is_numeric($_SESSION['basic_authentication_block']))
+		{
+			if (time() - $_SESSION['basic_authentication_block'] > ($timeBlocked * 60))
+			{
+				$_SESSION['basic_authentication_block'] = 'NO';
+				unset($_SESSION['basic_authentication_block']);
+			}
+			else
+			{
+				return 'Too many login attempts, your account has been blocked temporarily.';
+			}
+		}
+		
 		
 		if (isset($_POST['pwd']))
 		{
@@ -90,11 +109,12 @@ Version: 1.5
 			{
 				$_SESSION['basic_authentication_loggedin'] 	= true;					
 				$_SESSION['basic_authentication_tries'] 	= 0;
+				$_SESSION['basic_authentication_pwd'] 		= md5(get_option('basic_authentication_password'));
 				return 'OK';		
 			}	
 			else
 			{
-				$_SESSION['basic_authentication_tries'] = is_numeric($_SESSION['basic_authentication_tries']) ? $_SESSION['basic_authentication_tries']++ : 1;		
+				$_SESSION['basic_authentication_tries'] = is_numeric($_SESSION['basic_authentication_tries']) ? $_SESSION['basic_authentication_tries'] + 1: 1;
 				return 'ERROR';		
 			}		
 		}
