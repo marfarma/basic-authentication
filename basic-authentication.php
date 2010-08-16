@@ -6,7 +6,7 @@ Plugin URI: http://www.cuvedev.net/2010/07/wordpress-plugin-authentication/
 Description: Disable access to wordpress if not logged in
 Author: Klaas Cuvelier
 Author URI: http://www.cuvedev.net
-Version: 1.6
+Version: 1.6.1
 */
 
 

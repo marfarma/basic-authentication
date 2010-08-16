@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: authentication, login
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 1.6
+Stable tag: 1.6.1
 
 With this plugin, you can ask users to authenticate before they can see your Wordpress site.
 
@@ -56,3 +56,6 @@ No special remarks
 * better flood protection 
 * defined blocked time
 * if using predefined pwd, you are not loggedin when the pwd changes (even though you're sessions can still be active)
+
+= 1.6.1 =
+* debug fix
