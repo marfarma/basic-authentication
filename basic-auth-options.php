@@ -11,7 +11,6 @@
 	 
 	 $uploadInf = wp_upload_dir();
 	 $uploadDir = str_replace( get_option('siteurl'), '', $uploadInf['baseurl']);
-	 $templtDir = bloginfo('template_directory');
 ?>
 <div class="wrap">
 	<h2>Basic Authentication: Options</h2>
