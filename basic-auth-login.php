@@ -4,7 +4,7 @@
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.6.1
+	 * @version		1.7
 	 * @license		GPL v2.0
 	 * 
 	 */
