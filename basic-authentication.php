@@ -15,7 +15,7 @@ Version: 1.8
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.8
+	 * @version		1.8.1
 	 * @license		GPL v2.0
 	 * 
 	 */
@@ -37,7 +37,7 @@ Version: 1.8
 		list($url, $crap) = explode('?', $url);
 
         // extra check when WP isn't installed in root dir - thx @ Rob Record
-        $wp_dir = str_replace(‘http://’ . $_SERVER['HTTP_HOST'], ”, site_url());
+        $wp_dir = str_replace('http://' . $_SERVER['HTTP_HOST'], '', site_url());
         $redirect_url = $wp_dir . $url;
 		
 

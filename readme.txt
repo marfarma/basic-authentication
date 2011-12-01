@@ -65,3 +65,6 @@ No special remarks
 
 = 1.8 =
 * fix redirect_url when WP isn't installed in root directory. Thx @ Rob Record
+
+= 1.8.1 =
+* bugfix
