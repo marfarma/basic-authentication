@@ -6,7 +6,7 @@ Plugin URI: http://www.cuvedev.net/2010/07/wordpress-plugin-authentication/
 Description: Disable access to wordpress if not logged in
 Author: Klaas Cuvelier
 Author URI: http://www.cuvedev.net
-Version: 1.7
+Version: 1.8
 */
 
 
@@ -15,7 +15,7 @@ Version: 1.7
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.7
+	 * @version		1.8
 	 * @license		GPL v2.0
 	 * 
 	 */
@@ -35,6 +35,10 @@ Version: 1.7
 		// get current page
 		$url = str_replace(site_url(), '', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);		
 		list($url, $crap) = explode('?', $url);
+
+        // extra check when WP isn't installed in root dir - thx @ Rob Record
+        $wp_dir = str_replace(‘http://’ . $_SERVER['HTTP_HOST'], ”, site_url());
+        $redirect_url = $wp_dir . $url;
 		
 
 		// check if not login-page or admin-panel
@@ -57,7 +61,7 @@ Version: 1.7
 			}
 			else if ($authMethod === 'wp-login'	&& !is_user_logged_in())
 			{
-				header('LOCATION: ' . site_url('wp-login.php?redirect_to=' . urlencode($url) . '&reauth=1'));
+				header('LOCATION: ' . site_url('wp-login.php?redirect_to=' . urlencode($redirect_url) . '&reauth=1'));
 				exit;				
 			}
 		}
