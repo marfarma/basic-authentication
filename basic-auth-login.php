@@ -4,7 +4,7 @@
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.8.1
+	 * @version		1.9
 	 * @license		GPL v2.0
 	 * 
 	 */
@@ -16,7 +16,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name='robots' content='noindex,nofollow' />
 	
-		<link rel='stylesheet' id='login-css'  href='<?php echo get_option('siteurl'); ?>/wp-admin/css/login.css' type='text/css' media='all' />
+<?php if ((float)get_bloginfo('version') >= 3.3) { ?>
+        <link rel='stylesheet' id='login-css'  href='<?php echo get_option('siteurl'); ?>/wp-admin/css/wp-admin.css' type='text/css' media='all' />
+<?php } else { ?>
+        <link rel='stylesheet' id='login-css'  href='<?php echo get_option('siteurl'); ?>/wp-admin/css/login.css' type='text/css' media='all' />
+<?php } ?>
 		<link rel='stylesheet' id='colors-fresh-css'  href='<?php echo get_option('siteurl'); ?>/wp-admin/css/colors-fresh.css' type='text/css' media='all' />
 </head>
 <body class="login">

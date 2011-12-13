@@ -15,7 +15,7 @@ Version: 1.8
 	 * 
 	 * @copyright 	Klaas Cuvelier
 	 * @author 		Klaas Cuvelier, cuvelierklaas@gmail.com (http://www.cuvedev.net)
-	 * @version		1.8.1
+	 * @version		1.9
 	 * @license		GPL v2.0
 	 * 
 	 */
