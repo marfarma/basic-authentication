@@ -3,7 +3,7 @@ Contributors: Klaas Cuvelier
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LKYLGQJPSRY9Q
 Tags: authentication, login
 Requires at least: 3.0
-Tested up to: 3.2.1
+Tested up to: 3.3
 Stable tag: 1.9
 
 With this plugin, you can ask users to authenticate before they can see your Wordpress site.
